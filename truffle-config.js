@@ -33,7 +33,8 @@ module.exports = {
     // NB: It's important to wrap the provider as a function.
     // Configs to connect to Rinkeby Testnet
     rinkeby: {
-    provider: () => new HDWalletProvider(MNEMONIC, `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API}`),
+      provider: () => new HDWalletProvider(MNEMONIC, `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API}`
+      ),
     network_id: 4,       
     // gas: 5500000,        // Ropsten has a lower block limit than mainnet
     // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
