@@ -78,7 +78,7 @@ contract EthStreamShop {
   */
   function buyMerch(uint _merchandiseNumber) payable public {
     require(merchandise[_merchandiseNumber].isSold == false, "Merchandise is not available");
-    require(merchandise[_merchandiseNumber].timeLeft < block.timestamp);
+    require(merchandise[_merchandiseNumber].timeLeft <= block.timestamp);
 
     merchandise[_merchandiseNumber].seller.transfer(merchandise[_merchandiseNumber].price - merchandise[_merchandiseNumber].commissionFee);
     merchandise[_merchandiseNumber].buyer = payable(msg.sender);
