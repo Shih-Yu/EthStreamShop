@@ -3,7 +3,7 @@ pragma solidity ^0.8.6;
 
 /*
   Contract:
-    -Use Chainlink to display current price of Eth/USD
+    -Use Chainlink to display current price of Eth/USD interface
     -Allow seller to input price
     -Tranfers money from buyer to seller
     -Contract gets 20% commission for items sold
@@ -11,6 +11,10 @@ pragma solidity ^0.8.6;
     -Time limit for item listed (block.timestamp)
 */
 
+// Chainlink price feed interface
+interface PriceFeed {
+  function getEthUsdPrice() external view returns(uint);
+}
 contract EthStreamShop {
   // State variables
   address public owner;
@@ -53,7 +57,7 @@ contract EthStreamShop {
       -Amount for sale
       -Price -> convert to Eth
       -Availablility
-      -Time limit
+      -Time limit in minutes
       -Commission fee
       -Buyer address
       -Seller address
@@ -73,7 +77,7 @@ contract EthStreamShop {
       amountToSell: _amount,
       price: _price,
       isSold: false,
-      timeLeft: block.timestamp + (_timeLeft * 60),
+      timeLeft: block.timestamp + (_timeLeft * 60 seconds),
       commissionFee: (_price * 2)/100,
       buyer: payable(msg.sender),
       seller: payable(_seller),
@@ -93,12 +97,14 @@ contract EthStreamShop {
     - Mark merchandise to sold
     -Subtract amount bought from supply
     -Owner of contract cannot buy merchandise
+    -Seller of merchandise cannot buy their own product
   */
   function buyMerch(uint _merchandiseNumber, uint _amount) payable public {
     require(merchandise[_merchandiseNumber].isSold == false, "Merchandise is not available");
-    require(merchandise[_merchandiseNumber].timeLeft <= block.timestamp, "Time is over for this merchandise");
+    require(merchandise[_merchandiseNumber].timeLeft >= block.timestamp, "Time is over for this merchandise");
     require(merchandise[_merchandiseNumber].amountToSell > 0, "Out of merchandise");
-    require(msg.sender != owner);
+    require(msg.sender != owner, "Owner cannot purchase merchandise");
+    require(msg.sender != merchandise[_merchandiseNumber].seller, "Seller cannot buy their own product");
 
     merchandise[_merchandiseNumber].seller.transfer(merchandise[_merchandiseNumber].price - merchandise[_merchandiseNumber].commissionFee);
     merchandise[_merchandiseNumber].buyer = payable(msg.sender);
