@@ -1,5 +1,5 @@
 {
-  "name": "kreatorstream",
+  "name": "EthStreamShop",
   "version": "1.0.0",
   "description": "",
   "main": "truffle-config.js",
@@ -11,15 +11,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shih-Yu/KreatorStream.git"
+    "url": "git+https://github.com/Shih-Yu/EthStreamShop.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Shih-Yu/KreatorStream/issues"
+    "url": "https://github.com/Shih-Yu/EthStreamShop/issues"
   },
-  "homepage": "https://github.com/Shih-Yu/KreatorStream#readme",
+  "homepage": "https://github.com/Shih-Yu/EthStreamShop#readme",
   "dependencies": {
+    "@chainlink/contracts": "^0.3.0",
     "@truffle/hdwallet-provider": "^2.0.0",
     "dotenv": "^10.0.0"
   }
