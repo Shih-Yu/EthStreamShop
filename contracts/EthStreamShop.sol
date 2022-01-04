@@ -13,7 +13,7 @@ pragma solidity ^0.8.6;
 
 // Chainlink price feed interface
 interface PriceFeed {
-  function getEthUsdPrice() external view returns(uint);
+  function getLatestPrice() external view returns(uint);
 }
 contract EthStreamShop {
   // State variables
