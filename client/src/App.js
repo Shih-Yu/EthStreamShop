@@ -9,13 +9,13 @@ import "./App.css";
 
 function App() {
   return (
-    <Router>
+    <Router >
       <div>
         <Nav />
-        <Routes>
-          <Route exact path="/" component={Home} />
-          <Route path="/watch" component={Watch} />
-          <Route path="/add" component={Add} />
+        <Routes >
+          <Route exact path="/" element={<Home />} />
+          <Route path="/watch" element={<Watch />} />
+          <Route path="/add" element={<Add />} />
         </Routes>
       </div>
     </Router>

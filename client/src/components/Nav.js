@@ -1,15 +1,25 @@
-import React from 'react'
-import { Link } from "react-router-dom"
+import React from 'react';
+import { Link } from "react-router-dom";
 import { Navbar, Container, Button } from "react-bootstrap";
-// import { providers } from 'ethers';
+import { ethers } from "ethers";
+
+
 
 
 export default function Nav() {
 
-// Connect to Metamask wallet
- async function metaMaskConnect() {
+  // Check webpage if a wallet exists
+  async function checkWallet() {
+    await window.ethereum.request({ method: "eth_requestAccounts" });
+  };
+
 // Request account from Metamask wallet and prompt user to connect if not connect
-   await window.ethereum.request({ method: "eth_requestAccounts" });
+  // Connect to wallet provider of webpage
+ async function connect() {
+   await checkWallet();
+   const provider = new ethers.providers.Web3Provider(window.etherum);
+  const signer = provider.signer();
+  
   };
 
   return (
@@ -27,9 +37,11 @@ export default function Nav() {
             Add Merch
           </Link>
           <Button
-            class="btn btn-success"
-            onClick={metaMaskConnect}
-          >Connect</Button>
+            className="btn btn-success"
+            onClick={ connect }
+          >
+            Connect Wallet
+          </Button>
         </Navbar>
       </Container>
     </>
