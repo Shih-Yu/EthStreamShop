@@ -5,9 +5,9 @@ contract("EthStreamShop", async (accounts) => {
   const owner = accounts[0];
   const seller = accounts[1];
   const merchName = "Tv";
-  const price = "10";
-  const amount = "3";
-  const timeLeft = "5";
+  const price = 10;
+  const amount = 3;
+  const timeLeft = 5;
 
 
   describe("Initial deployment", async () => {
@@ -34,12 +34,12 @@ contract("EthStreamShop", async (accounts) => {
 
       // Get first merchandise in list
       let result = await instance.getMerch.call(0);
+      // console.log(result);
 
-      assert.equal(result[0], seller, "seller's address is different from owner");
-      // assert.equal(result[1], merchName, "merchandise should not be empty");
-      // assert.equal(result[2], price, "");
-      // assert.equal(result[3], amount, "");
-      // assert.operator(result[4], ">=", timeLeft, "");
+      assert.notEqual(tx[0], seller, "seller's address is different from owner");
+      assert.equal(result[0], merchName, "merchandise should not be empty");
+      assert.isAtLeast(result[3].toNumber(), 1, "price should not be zero");
+      assert.isAtLeast(result[2].toNumber(), 1, "amount should not be zero");
     });
 
     // Get merchandise
