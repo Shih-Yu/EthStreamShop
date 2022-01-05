@@ -1,25 +1,16 @@
 import React from 'react';
-import { Home, Add, Watch } from './pages';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Nav from "./components/Nav";
+import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
 function App() {
   return (
-    <div className='App'>
-      <Router>
-        <Routes>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route path='/add'>
-            <Add />
-          </Route>
-          <Route path='/watch'>
-            <Watch />
-          </Route>
-        </Routes>
-      </Router>
+    <Router>
+    <div>
+      <Nav />
     </div>
+    </Router>
   );
 }
 
