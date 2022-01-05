@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.6;
 
-/*
+/** 
   Contract:
-    -Use Chainlink to display current price of Eth/USD interface
-    -Allow seller to input price
-    -Tranfers money from buyer to seller
-    -Contract gets 20% commission for items sold
-    -Struct of item information
-    -Time limit for item listed (block.timestamp)
-*/
+    *Use Chainlink to display current price of Eth/USD interface
+    *Allow seller to input price
+    *Tranfers money from buyer to seller
+    *Contract gets 20% commission for items sold
+    *Struct of item information
+    *Time limit for item listed (block.timestamp)
+**/
 
 // Chainlink price feed interface
 interface PriceFeed {
@@ -41,6 +41,9 @@ contract EthStreamShop {
     address payable owner;
   }
 
+// Events to keep track of merchandise
+event LogMerchForSale(uint _merchNum);
+event LogMerchSold(uint _merchNum);
 
 
   // Assign deployer of the contract as the owner
@@ -85,6 +88,7 @@ contract EthStreamShop {
      });
 
      merchandiseNumber += 1;
+     emit LogMerchForSale(merchandiseNumber);
      return true;
   }
 
@@ -111,6 +115,9 @@ contract EthStreamShop {
     merchandise[_merchandiseNumber].owner.transfer(merchandise[_merchandiseNumber].commissionFee);
     merchandise[_merchandiseNumber].amountToSell - _amount;
     merchandise[_merchandiseNumber].isSold = true;
+
+    emit LogMerchSold(merchandiseNumber);
+    
   }
 
 // Function to get merchandise
