@@ -20,7 +20,7 @@ module.exports = {
    */
 
   // Assigning th ebuild directory to be created inside the scr directory
-  contracts_build_directory: path.join(__dirname, "src/build"),
+  contracts_build_directory: path.join(__dirname, "client/src/build"),
 
   networks: {
     development: {
