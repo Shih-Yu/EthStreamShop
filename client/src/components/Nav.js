@@ -1,9 +1,17 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
+import { Navbar, Container, Button } from "react-bootstrap";
+// import { providers } from 'ethers';
+
 
 export default function Nav() {
+
+// Connect to Metamask wallet
+ async function metaMaskConnect() {
+// Request account from Metamask wallet and prompt user to connect if not connect
+   await window.ethereum.request({ method: "eth_requestAccounts" });
+  };
+
   return (
     <>
       <Container fluid>
@@ -18,7 +26,10 @@ export default function Nav() {
           <Link className="text-dark mr-2" to="/add">
             Add Merch
           </Link>
-          <button class="btn btn-success">Connect</button>
+          <Button
+            class="btn btn-success"
+            onClick={metaMaskConnect}
+          >Connect</Button>
         </Navbar>
       </Container>
     </>
