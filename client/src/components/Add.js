@@ -25,18 +25,26 @@ export default function Add() {
     await window.ethereum.request({ method: "eth_requestAccounts" });
   };
 
+
+
   // Function to add merchandise
   async function addMerch() {
-    await checkWallet();
+    // await checkWallet();
 
     // Checking if wallet exists and is connected
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     // Checking the account of the wallet
-    const signer = provider.getsigner();
+    const signer = provider.getSigner();
     // Using Ethers.js to call the contract on Rinkeby Testnet
     const contract = new ethers.Contract(contractAddress, EthStreamShop.abi, signer);
 
-    let transaction = await contract.addMerch(formInput);
+    const seller = formInput.seller;
+    const merchName = formInput.merchName;
+    const price = ethers.utils.parseUnits(formInput.price, "ethers");
+    const amount = formInput.amount.toNumber();
+    const timeLeft = formInput.timeLeft.toNumber();
+
+    let transaction = await contract.addMerch(seller, merchName, price, amount, timeLeft);
     await transaction.wait();
     
   }

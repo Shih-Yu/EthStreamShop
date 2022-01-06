@@ -5,8 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export default function Home() {
   return (
     <div className="App">
-      <h1>Home</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo vitae veniam sed ut alias architecto impedit optio voluptatibus ipsum a animi recusandae, necessitatibus illum ratione ex repudiandae? Beatae, impedit! Ipsum voluptas voluptates nisi quas. Veritatis vero eligendi mollitia adipisci tempore sequi numquam. Illum perspiciatis quam tempore consectetur cumque aperiam earum.</p>
+      <h1 className="m-5">Welcome to EthStreamShop</h1>
+      <h2 className="m-5">A Decentralized platform that allows users to sell from anywhere they like!</h2>
+      <h4>-Garage sale from your house</h4>
+      <h4>-Large/Small businesses can have special live promotional sales</h4>
+      <h4>-Touring bands can sell merch and stream their concerts live!</h4>
+      <h4>-And much much more!</h4>
     </div>
   )
 }
