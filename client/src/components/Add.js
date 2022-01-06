@@ -5,10 +5,13 @@ import { Form, Button, Container } from "react-bootstrap";
 // Contract ABI
 import EthStreamShop from "../build/EthStreamShop.json";
 
-// Contract code on Rinkeby Testnet
+// Contract address on Rinkeby Testnet
 const contractAddress = "0xdD6875e93B9c494470C5eb20B43476Eff9A99aD8";
 
+
+
 export default function Add() {
+  // State for form
   const [formInput, setFormInput] = useState({
     seller: "",
     merchName: "",
@@ -17,9 +20,26 @@ export default function Add() {
     timeLimit: "",
   });
 
-  // Function to add merchandise
-  async function addMerch() {}
+//  Check for wallet connection
+  async function checkWallet() {
+    await window.ethereum.request({ method: "eth_requestAccounts" });
+  };
 
+  // Function to add merchandise
+  async function addMerch() {
+    await checkWallet();
+
+    // Checking if wallet exists and is connected
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // Checking the account of the wallet
+    const signer = provider.getsigner();
+    // Using Ethers.js to call the contract on Rinkeby Testnet
+    const contract = new ethers.Contract(contractAddress, EthStreamShop.abi, signer);
+
+    let transaction = await contract.addMerch(formInput);
+    await transaction.wait();
+    
+  }
   return (
     <div>
       <Container fluid="sm" className="mt-5">
