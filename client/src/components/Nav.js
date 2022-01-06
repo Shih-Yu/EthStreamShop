@@ -27,15 +27,20 @@ export default function Nav() {
       <Container fluid>
         <Navbar className="text-center justify-content-between pr-5 fs-4">
           <Navbar.Brand className="fs-1">EthStreamShop</Navbar.Brand>
-          <Link className="text-dark mr-2" to="/">
+          <Button><Link className="text-warning mr-2" to="/">
             Home
           </Link>
-          <Link className="text-dark mr-2" to="/watch">
+          </Button>
+          <Button>
+          <Link className="text-warning mr-2" to="/watch">
             Watch
-          </Link>
-          <Link className="text-dark mr-2" to="/add">
+            </Link>
+          </Button>
+          <Button>
+          <Link className="text-warning mr-2" to="/add">
             Add Merch
           </Link>
+          </Button>
           <Button
             className="btn btn-success"
             onClick={ connect }
