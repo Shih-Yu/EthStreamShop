@@ -33,7 +33,7 @@ export default function Nav() {
     //  Convert price to readable number
      let price = ethers.utils.formatEther(data) * 10e9;
     //  set State to price from pricefeed
-      setCurrentPrice(price)
+      setCurrentPrice(price.toFixed(2))
    } catch (error) {
      console.error("Error", error);
    }
@@ -46,7 +46,7 @@ export default function Nav() {
       <Container fluid>
         <Navbar className="text-center justify-content-between pr-5 fs-4">
           <Navbar.Brand className="fs-1">EthStreamShop</Navbar.Brand>
-          <Button className="btn-info" onClick={ getPrice() }>Eth/USD:$ { currentPrice}</Button>
+          <Button className="btn-info" onClick={ getPrice()}>Eth/USD:$ { currentPrice}</Button>
           <Button><Link className="text-warning mr-2" to="/">
             Home
           </Link>
